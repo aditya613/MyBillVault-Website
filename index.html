@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="MyBillVault is an AI-powered app that reads your thermal receipts in under 2 seconds — extracting merchant, GST, and warranty expiry automatically. Join 2,400+ people on the early-access waitlist." />
+  <meta name="keywords" content="bill management, warranty tracker, GST receipt, AI scan, MyBillVault, digital vault" />
+  <meta property="og:title" content="MyBillVault — Never lose a warranty again" />
+  <meta property="og:description" content="Snap a photo of any bill. AI extracts merchant, GST, total, and warranty date in under 2 seconds. Join the waitlist." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#060912" />
+
+  <title>MyBillVault — Your Receipts, Archived Forever</title>
+
+  <!-- Preconnect for fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- =========================================================
+       NAVIGATION
+  ========================================================= -->
+  <header id="nav" class="nav" role="banner">
+    <div class="nav__inner">
+
+      <!-- Logo -->
+      <a href="#" class="nav__logo" aria-label="MyBillVault home">
+        <div class="nav__logo-icon" aria-hidden="true">
+          <!-- Vault icon SVG -->
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="3" width="12" height="9" rx="1.5" stroke="white" stroke-width="1.5"/>
+            <rect x="5" y="6" width="6" height="3" rx="0.75" stroke="white" stroke-width="1.2"/>
+            <line x1="8" y1="12" x2="8" y2="14" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="5.5" y1="14" x2="10.5" y2="14" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        MyBillVault
+      </a>
+
+      <!-- Nav CTA -->
+      <a href="#hero-form" class="nav__cta" id="nav-cta">
+        Join Waitlist
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <path d="M2.5 6h7M7 3.5 9.5 6 7 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+
+    </div>
+  </header>
+
+
+  <!-- =========================================================
+       HERO
+  ========================================================= -->
+  <main>
+    <section class="hero" id="hero" aria-labelledby="hero-headline">
+      <div class="hero__inner">
+
+        <!-- Copy column -->
+        <div class="hero__copy">
+
+          <!-- Pre-headline tag -->
+          <div class="hero__tag" aria-label="Status: Launching soon">
+            <span class="hero__tag-dot" aria-hidden="true"></span>
+            <span>Early Access — Launching Soon</span>
+          </div>
+
+          <!-- Headline — Instrument Serif, tight leading -->
+          <h1 class="hero__headline" id="hero-headline">
+            Every receipt.<br />
+            Every warranty.<br />
+            <em>Never lost.</em>
+          </h1>
+
+          <!-- Sub -->
+          <p class="hero__sub">
+            Snap a photo of any thermal bill. Our AI reads it in under 2 seconds —
+            extracting merchant, GST number, amount, and calculating your exact
+            warranty expiry date. All stored in your personal vault.
+          </p>
+
+          <!-- Email capture form -->
+          <div id="hero-form-wrapper">
+            <form class="hero__form" id="hero-form" novalidate aria-label="Waitlist signup form">
+
+              <div class="hero__input-wrap">
+                <label for="hero-email" class="visually-hidden">Email address</label>
+                <input
+                  type="email"
+                  id="hero-email"
+                  class="hero__email-input"
+                  placeholder="yourname@gmail.com"
+                  autocomplete="email"
+                  required
+                  aria-describedby="hero-error"
+                />
+                <button type="submit" id="hero-submit" class="hero__submit-btn">
+                  Get Early Access
+                </button>
+              </div>
+
+              <p id="hero-error" class="hero__error" role="alert" aria-live="polite"></p>
+
+            </form>
+
+            <!-- Success state — hidden until JS shows it -->
+            <div
+              id="hero-form-success"
+              class="hero__form-success"
+              role="status"
+              aria-live="polite"
+              aria-hidden="true"
+            >
+              <div class="hero__form-success-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M4 10l4.5 4.5L16 6" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <p class="hero__form-success-title">You're on the list!</p>
+              <p class="hero__form-success-sub">We'll email you the moment MyBillVault opens. You'll be among the first 500.</p>
+            </div>
+          </div>
+
+          <!-- Trust signals -->
+          <div class="hero__trust">
+            <div class="hero__trust-avatars" aria-hidden="true">
+              <div class="hero__trust-avatar">R</div>
+              <div class="hero__trust-avatar">P</div>
+              <div class="hero__trust-avatar">S</div>
+              <div class="hero__trust-avatar">A</div>
+            </div>
+            <span>
+              <span class="hero__trust-count" id="trust-count">2,400+</span>
+              people already on the waitlist · Free forever tier included
+            </span>
+          </div>
+
+        </div>
+
+        <!-- Receipt card — the signature element -->
+        <div class="hero__visual" aria-hidden="true">
+          <div class="hero__visual-bg"></div>
+
+          <div class="receipt-card" id="receipt-card" role="img" aria-label="Live demo: AI scanning a Reliance Digital receipt for a Dyson V15 vacuum cleaner">
+
+            <!-- Card header -->
+            <div class="receipt-card__header">
+              <span class="receipt-card__title">BILL ANALYSIS</span>
+              <div class="receipt-card__badge">
+                <span class="receipt-card__badge-dot"></span>
+                AI ACTIVE
+              </div>
+            </div>
+
+            <!-- Scan area with beam -->
+            <div class="receipt-card__scan-area">
+
+              <!-- The traveling scan line -->
+              <div class="scan-beam" aria-hidden="true"></div>
+
+              <!-- Data fields — each reveals as beam passes -->
+              <div class="receipt-fields">
+
+                <div class="receipt-field" style="--field-delay: 0.4s">
+                  <span class="field-label">MERCHANT</span>
+                  <span class="field-value">Reliance Digital</span>
+                </div>
+
+                <div class="receipt-field" style="--field-delay: 0.9s">
+                  <span class="field-label">DATE</span>
+                  <span class="field-value">14 Mar 2026</span>
+                </div>
+
+                <div class="receipt-divider" aria-hidden="true"></div>
+
+                <div class="receipt-field" style="--field-delay: 1.3s">
+                  <span class="field-label">GST NO</span>
+                  <span class="field-value" style="font-size: 0.7rem; letter-spacing: 0.02em;">27AABCR1234M1Z5</span>
+                </div>
+
+                <div class="receipt-field" style="--field-delay: 1.7s">
+                  <span class="field-label">GST PAID</span>
+                  <span class="field-value brand">₹9,525.42</span>
+                </div>
+
+                <div class="receipt-divider" aria-hidden="true"></div>
+
+                <div class="receipt-field" style="--field-delay: 2.1s">
+                  <span class="field-label">TOTAL</span>
+                  <span class="field-value" style="font-size: 1rem; font-weight: 700;">₹62,900.00</span>
+                </div>
+
+                <div class="receipt-field" style="--field-delay: 2.5s">
+                  <span class="field-label">WARRANTY</span>
+                  <span class="field-value accent">2 yr · Exp. Mar 2028</span>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Locked / sealed footer -->
+            <div class="receipt-card__footer">
+              <div class="receipt-lock">
+                <div class="receipt-lock__icon">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <rect x="3" y="6" width="8" height="6" rx="1" stroke="#22C55E" stroke-width="1.3"/>
+                    <path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="#22C55E" stroke-width="1.3" stroke-linecap="round"/>
+                    <circle cx="7" cy="9" r="0.8" fill="#22C55E"/>
+                  </svg>
+                </div>
+                <div class="receipt-lock__text">
+                  <span class="receipt-lock__title">Vault Saved</span>
+                  <span class="receipt-lock__sub">Dyson V15 Detect Absolute</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         PROBLEM
+    ========================================================= -->
+    <section class="problem section reveal-on-scroll" id="problem" aria-labelledby="problem-headline">
+      <div class="problem__inner">
+        <p class="eyebrow" id="problem-headline">The Problem</p>
+        <blockquote class="problem__quote">
+          "The repair guy wants your warranty receipt. <span>You have 47 paper slips.</span>
+          <strong>None of them is the right one.</strong>"
+        </blockquote>
+        <p class="problem__resolution">
+          MyBillVault ends this. Permanently.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         HOW IT WORKS — Sticky scroll panels
+    ========================================================= -->
+    <section class="how section" id="how" aria-labelledby="how-headline">
+
+      <!-- The tall element that drives scroll progress -->
+      <div id="how-scroll-driver" class="how__scroll-driver">
+
+        <!-- Sticky container — stays pinned while user scrolls through driver -->
+        <div class="how__sticky-wrapper">
+          <div class="how__layout">
+
+            <!-- Left: Section header + step nav indicator -->
+            <div class="how__header">
+              <p class="eyebrow reveal-on-scroll" style="--reveal-delay: 0ms">How It Works</p>
+              <h2 class="headline-section reveal-on-scroll" id="how-headline" style="--reveal-delay: 80ms">
+                Three seconds.<br />A lifetime organised.
+              </h2>
+
+              <nav class="how__step-nav" aria-label="Steps navigation">
+                <div class="how__step-nav-item active">
+                  <div class="how__step-nav-indicator"></div>
+                  <span class="how__step-nav-label">Snap</span>
+                </div>
+                <div class="how__step-nav-item">
+                  <div class="how__step-nav-indicator"></div>
+                  <span class="how__step-nav-label">Extract</span>
+                </div>
+                <div class="how__step-nav-item">
+                  <div class="how__step-nav-indicator"></div>
+                  <span class="how__step-nav-label">Lock</span>
+                </div>
+              </nav>
+            </div>
+
+            <!-- Right: Step panels -->
+            <div class="how__panels" aria-live="polite">
+
+              <!-- Step 1: Snap -->
+              <article class="how-step active" data-step="1" aria-label="Step 1: Snap">
+                <div class="how-step__visual">
+                  <div class="step-camera" aria-hidden="true">
+                    <div class="step-camera-inner">
+                      <!-- Camera shutter icon -->
+                      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                        <circle cx="11" cy="12" r="4" stroke="#2B6EFD" stroke-width="1.5"/>
+                        <path d="M7 6h1.5l1.5-2h2l1.5 2H15a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z" stroke="#2B6EFD" stroke-width="1.5" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <h3 class="how-step__title">Snap</h3>
+                <p class="how-step__body">
+                  Open MyBillVault and point your camera at any thermal receipt —
+                  from a supermarket, appliance store, restaurant, or an online delivery slip.
+                  No need to flatten it perfectly.
+                </p>
+              </article>
+
+              <!-- Step 2: Extract -->
+              <article class="how-step" data-step="2" aria-label="Step 2: Extract">
+                <div class="how-step__visual">
+                  <div class="step-extract-ui" aria-hidden="true">
+                    <div class="step-extract-row">
+                      <span class="step-extract-label">MERCHANT</span>
+                      <span class="step-extract-value">Croma</span>
+                    </div>
+                    <div class="step-extract-row">
+                      <span class="step-extract-label">GST NO</span>
+                      <span class="step-extract-value">27AAACM3025A1ZJ</span>
+                    </div>
+                    <div class="step-extract-row">
+                      <span class="step-extract-label">TOTAL AMOUNT</span>
+                      <span class="step-extract-value">₹1,08,499</span>
+                    </div>
+                    <div class="step-extract-row">
+                      <span class="step-extract-label">WARRANTY EXPIRY</span>
+                      <span class="step-extract-value highlight">11 Aug 2028</span>
+                    </div>
+                  </div>
+                </div>
+                <h3 class="how-step__title">Extract</h3>
+                <p class="how-step__body">
+                  Our AI reads the thermal print — even faded ones — and extracts every
+                  field: merchant name, GST number, exact total, item details, and
+                  calculates the precise warranty expiry date from the purchase date.
+                </p>
+              </article>
+
+              <!-- Step 3: Lock -->
+              <article class="how-step" data-step="3" aria-label="Step 3: Lock">
+                <div class="how-step__visual">
+                  <div class="step-vault-icon" aria-hidden="true">
+                    <div class="step-vault-ring">
+                      <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <rect x="10" y="18" width="20" height="14" rx="2.5" stroke="#22C55E" stroke-width="2"/>
+                        <path d="M13 18V14a7 7 0 0 1 14 0v4" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="20" cy="25" r="2" fill="#22C55E"/>
+                        <line x1="20" y1="27" x2="20" y2="30" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
+                      </svg>
+                    </div>
+                    <span class="step-vault-label">SECURED IN VAULT</span>
+                  </div>
+                </div>
+                <h3 class="how-step__title">Lock</h3>
+                <p class="how-step__body">
+                  Every bill is secured in your personal vault with a warranty alert timeline.
+                  You'll get a notification 30 days before any warranty expires.
+                  Never miss a claim window again.
+                </p>
+              </article>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         PRODUCT SHOWCASE — Asymmetric Bento Grid
+    ========================================================= -->
+    <section class="showcase section" id="showcase" aria-labelledby="showcase-headline">
+      <div class="container">
+
+        <header class="showcase__header reveal-on-scroll">
+          <p class="eyebrow">The App</p>
+          <h2 class="headline-section" id="showcase-headline">
+            Your entire purchase history.<br />
+            <em style="font-style: italic; color: var(--c-muted);">In one place.</em>
+          </h2>
+        </header>
+
+        <div class="bento-grid reveal-stagger" id="bento-grid">
+
+          <!-- Large panel — app mockup screenshot -->
+          <div class="bento-panel bento-large" style="--stagger-index: 0" aria-label="App dashboard showing 7 assets worth ₹4,67,288">
+            <img
+              src="C:/Users/Aditya/.gemini/antigravity-ide/brain/11f8a62a-4165-45b5-ac2f-037db776b2a0/app_mockup_dashboard_1786473126059.png"
+              alt="MyBillVault dashboard showing 7 stored assets, total purchase value of ₹4,67,288, and expiring warranties"
+              loading="lazy"
+            />
+          </div>
+
+          <!-- Small panel 1 — Warranty timeline -->
+          <div class="bento-panel bento-small" style="--stagger-index: 1" aria-label="Warranty tracking example">
+            <p class="bento-panel__eyebrow">WARRANTY TRACKER</p>
+            <h3 class="bento-panel__title">Never miss<br />a claim window.</h3>
+
+            <div class="warranty-item">
+              <div class="warranty-item__header">
+                <div>
+                  <p class="warranty-item__name">Dyson V15 Detect</p>
+                  <p class="warranty-item__brand">Dyson India</p>
+                </div>
+                <span class="warranty-badge warranty-badge--active">ACTIVE</span>
+              </div>
+              <div class="warranty-progress" aria-label="808 days warranty remaining">
+                <div class="warranty-progress__bar" style="width: 66%" aria-hidden="true"></div>
+              </div>
+              <p class="warranty-progress__label">808 days remaining · Expires 14 Mar 2028</p>
+            </div>
+
+            <div class="warranty-item" style="margin-top: var(--space-3)">
+              <div class="warranty-item__header">
+                <div>
+                  <p class="warranty-item__name">JBL Charge 5</p>
+                  <p class="warranty-item__brand">JBL</p>
+                </div>
+                <span class="warranty-badge warranty-badge--expiring">36 DAYS</span>
+              </div>
+              <div class="warranty-progress" aria-label="36 days warranty remaining">
+                <div class="warranty-progress__bar" style="width: 8%; background: linear-gradient(90deg, var(--c-accent), rgba(245,158,11,0.4))" aria-hidden="true"></div>
+              </div>
+              <p class="warranty-progress__label">Expires soon — claim before it's too late</p>
+            </div>
+          </div>
+
+          <!-- Small panel 2 — GST extraction -->
+          <div class="bento-panel bento-small gst-panel" style="--stagger-index: 2" aria-label="AI data extraction demo">
+            <p class="bento-panel__eyebrow">AI EXTRACTION</p>
+            <h3 class="bento-panel__title">Faded receipt?<br />AI reads it anyway.</h3>
+
+            <div class="gst-demo" aria-label="Extracted receipt data">
+              <div class="gst-row">
+                <span class="gst-key">MERCHANT</span>
+                <span class="gst-val blue">Vijay Sales</span>
+              </div>
+              <div class="gst-row">
+                <span class="gst-key">GST NO</span>
+                <span class="gst-val">27AAACV0123B1ZX</span>
+              </div>
+              <div class="gst-row">
+                <span class="gst-key">CGST 9%</span>
+                <span class="gst-val">₹4,860</span>
+              </div>
+              <div class="gst-row">
+                <span class="gst-key">SGST 9%</span>
+                <span class="gst-val">₹4,860</span>
+              </div>
+              <div class="gst-row">
+                <span class="gst-key">TOTAL</span>
+                <span class="gst-val green" style="font-size: var(--text-sm); font-weight: 700;">₹54,000</span>
+              </div>
+              <div class="gst-row">
+                <span class="gst-key">WARRANTY</span>
+                <span class="gst-val amber">1 yr → Aug 2027</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         NUMBERS — Animated counters
+    ========================================================= -->
+    <section class="numbers section" id="numbers" aria-labelledby="numbers-headline">
+      <div class="container">
+        <p class="visually-hidden" id="numbers-headline">Key statistics</p>
+
+        <div class="numbers__grid">
+
+          <div class="numbers__item reveal-on-scroll" style="--reveal-delay: 0ms">
+            <p class="numbers__figure" aria-label="2400 plus people on the waitlist">
+              <span
+                class="counter-value"
+                data-counter="2400"
+                data-suffix="+"
+                data-duration="1400"
+              >2,400+</span>
+            </p>
+            <p class="numbers__label">On the waitlist</p>
+          </div>
+
+          <div class="numbers__item reveal-on-scroll" style="--reveal-delay: 100ms">
+            <p class="numbers__figure" aria-label="Under 2 seconds scan time">
+              <span class="unit" aria-hidden="true">&lt;</span><span
+                class="counter-value"
+                data-counter="2"
+                data-suffix="s"
+                data-duration="1200"
+                data-decimal="true"
+              >2s</span>
+            </p>
+            <p class="numbers__label">Receipt scan time</p>
+          </div>
+
+          <div class="numbers__item reveal-on-scroll" style="--reveal-delay: 200ms">
+            <p class="numbers__figure" aria-label="98 percent extraction accuracy">
+              <span
+                class="counter-value"
+                data-counter="98"
+                data-suffix="%"
+                data-duration="1200"
+              >98%</span>
+            </p>
+            <p class="numbers__label">AI extraction accuracy</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         FOUNDER
+    ========================================================= -->
+    <section class="founder section reveal-on-scroll" id="founder" aria-labelledby="founder-headline">
+      <div class="founder__inner">
+        <p class="founder__quote-mark" aria-hidden="true">"</p>
+        <blockquote class="founder__quote" id="founder-headline">
+          I lost an ₹82,000 washing machine warranty because the receipt
+          was in some bag I'd thrown away months ago. I built MyBillVault
+          so no one has to say that sentence again.
+        </blockquote>
+        <footer class="founder__attribution">
+          <div class="founder__avatar" aria-hidden="true">A</div>
+          <div>
+            <p class="founder__name">Aditya</p>
+            <p class="founder__role">Founder, MyBillVault</p>
+          </div>
+        </footer>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         FINAL CTA
+    ========================================================= -->
+    <section class="final-cta section" id="final-cta" aria-labelledby="final-cta-headline">
+      <div class="container final-cta__inner">
+
+        <div class="final-cta__urgency" role="note" aria-label="Limited early access offer">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M7 1v3M7 10v3M1 7h3M10 7h3" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="7" cy="7" r="2.5" stroke="#F59E0B" stroke-width="1.3"/>
+          </svg>
+          First 500 get lifetime Pro access — free
+        </div>
+
+        <h2 class="final-cta__headline" id="final-cta-headline">
+          Ready to never lose<br />
+          a receipt again?
+        </h2>
+
+        <p class="final-cta__sub">
+          Join the waitlist. We'll notify you first.
+        </p>
+
+        <!-- Final CTA form -->
+        <form class="final-cta__form" id="final-form" novalidate aria-label="Final waitlist signup form">
+          <label for="final-email" class="visually-hidden">Your email address</label>
+          <input
+            type="email"
+            id="final-email"
+            class="final-cta__input"
+            placeholder="yourname@gmail.com"
+            autocomplete="email"
+            required
+            aria-describedby="final-error"
+          />
+          <button type="submit" id="final-submit" class="final-cta__btn">
+            Join Waitlist
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </form>
+
+        <p id="final-error" class="final-cta__error" role="alert" aria-live="polite"></p>
+
+        <!-- Success state -->
+        <div
+          id="final-form-success"
+          class="final-cta__form-success"
+          role="status"
+          aria-live="polite"
+          aria-hidden="true"
+        >
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <circle cx="24" cy="24" r="23" stroke="#22C55E" stroke-width="1.5" stroke-dasharray="4 2" opacity="0.4"/>
+            <circle cx="24" cy="24" r="16" fill="rgba(34,197,94,0.12)"/>
+            <path d="M16 24l6 6 10-12" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p style="font-family: var(--font-display); font-size: var(--text-2xl); letter-spacing: var(--tracking-display);">You're in.</p>
+          <p style="color: var(--c-muted); font-size: var(--text-md);">Check your inbox — we'll reach out before anyone else does.</p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================= -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+
+      <div class="footer__logo">
+        <div class="footer__logo-icon" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+            <rect x="2" y="3" width="12" height="9" rx="1.5" stroke="white" stroke-width="1.5"/>
+            <rect x="5" y="6" width="6" height="3" rx="0.75" stroke="white" stroke-width="1.2"/>
+          </svg>
+        </div>
+        MyBillVault
+      </div>
+
+      <p class="footer__copy">© 2026 MyBillVault. Made in India 🇮🇳</p>
+
+      <nav class="footer__links" aria-label="Footer links">
+        <a href="#" class="footer__link">Privacy Policy</a>
+        <a href="#" class="footer__link">Terms</a>
+        <a href="mailto:hello@mybillvault.app" class="footer__link">Contact</a>
+      </nav>
+
+    </div>
+  </footer>
+
+
+  <!-- Visually hidden utility — accessible but not visible -->
+  <style>
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+
+  <!-- Scripts — deferred so they don't block first paint -->
+  <script src="js/scroll.js" defer></script>
+  <script src="js/scan.js" defer></script>
+  <script src="js/counters.js" defer></script>
+  <script src="js/waitlist.js" defer></script>
+
+</body>
+</html>
