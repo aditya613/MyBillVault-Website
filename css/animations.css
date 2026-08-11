@@ -1,0 +1,269 @@
+/* ============================================================
+   MyBillVault — Animations
+   All @keyframes live here. Animations are loaded after tokens.css.
+   Reduced-motion overrides at the bottom — they ship with the animation,
+   never as an afterthought. (Emil / animate skill rule §7)
+   ============================================================ */
+
+/* -----------------------------------------------------------
+   RECEIPT SCAN — the signature element
+   Plays once on page load. Frequency: rare/first-time. 
+   Purpose: Explanation (demonstrates the core product in 3s).
+   Tool: CSS @keyframes (off main thread, smooth while page loads).
+   Properties: clip-path for beam, opacity + translateY for fields.
+----------------------------------------------------------- */
+
+/* The scan line travels top → bottom */
+@keyframes scan-travel {
+  0%   { top: 0; opacity: 1; }
+  92%  { top: calc(100% - 2px); opacity: 1; }
+  100% { top: calc(100% - 2px); opacity: 0; }
+}
+
+/* Scan beam glow pulse */
+@keyframes scan-pulse {
+  0%, 100% { box-shadow: 0 0 8px 3px rgba(43, 110, 253, 0.5), 0 0 20px 6px rgba(43, 110, 253, 0.2); }
+  50%       { box-shadow: 0 0 14px 5px rgba(43, 110, 253, 0.7), 0 0 32px 10px rgba(43, 110, 253, 0.3); }
+}
+
+/* Individual receipt fields reveal as beam passes */
+/* Uses --field-delay set as inline CSS var per field */
+@keyframes field-appear {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* The value text within each field — types from left */
+@keyframes value-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
+}
+
+/* Lock icon snaps in after scan completes */
+@keyframes lock-snap {
+  0%   { opacity: 0; transform: scale(0.6) rotate(-8deg); }
+  60%  { transform: scale(1.08) rotate(2deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+/* Receipt card border glow after lock */
+@keyframes card-seal {
+  from { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+  50%  { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.2), 0 0 40px rgba(34, 197, 94, 0.1); }
+  to   { box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.15), 0 0 20px rgba(34, 197, 94, 0.07); }
+}
+
+/* "AI SCAN ACTIVE" badge pulse before scan starts */
+@keyframes badge-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* Scanning cursor blink on the active field */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+
+/* -----------------------------------------------------------
+   SCROLL REVEALS — generic utility
+   Purpose: Preventing a jarring change (elements teleporting in).
+   Frequency: Once per section per session.
+   Tool: CSS @keyframes triggered by .is-visible class (IntersectionObserver).
+   Properties: opacity + translateY only. GPU-composited.
+----------------------------------------------------------- */
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Stagger children inside a revealed parent */
+/* JS sets --stagger-index inline on each child */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.reveal-stagger.is-visible > * {
+  animation: reveal-up var(--dur-slow) var(--ease-out) forwards;
+  animation-delay: calc(var(--stagger-index, 0) * 60ms);
+}
+
+
+/* -----------------------------------------------------------
+   FORM SUCCESS STATE
+   Purpose: State indication + delight (rare first-time action).
+   Tool: CSS @starting-style (modern) + CSS transitions.
+   Properties: opacity + scale — never from scale(0).
+----------------------------------------------------------- */
+
+@keyframes success-arrive {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes checkmark-draw {
+  from { stroke-dashoffset: 40; }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* Confetti dots for success — purely decorative, rare tier */
+@keyframes confetti-pop {
+  0%   { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
+}
+
+
+/* -----------------------------------------------------------
+   AMBIENT — used extremely sparingly
+   Logo shimmer on nav load (once, never repeating on hover)
+----------------------------------------------------------- */
+
+@keyframes shimmer-once {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+
+/* -----------------------------------------------------------
+   HOW IT WORKS — step transitions
+   Purpose: State indication (which step is active).
+   Frequency: Occasional (scroll-driven, not rapid-fire).
+----------------------------------------------------------- */
+
+@keyframes step-enter {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes step-exit {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+}
+
+
+/* -----------------------------------------------------------
+   NUMBER TICKER — driven by WAAPI in counters.js
+   CSS only handles the initial hidden state.
+   The animation itself is via element.animate() for programmatic control.
+----------------------------------------------------------- */
+
+.counter-value {
+  display: inline-block;
+  font-variant-numeric: tabular-nums; /* fixed-width digits — no layout shift */
+}
+
+
+/* -----------------------------------------------------------
+   UTILITY CLASSES used by scroll.js
+----------------------------------------------------------- */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delay variants — set by JS with inline --reveal-delay */
+.reveal-on-scroll {
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+
+/* -----------------------------------------------------------
+   REDUCED MOTION OVERRIDES
+   Ships with the animations, not as a follow-up. (animate skill §7)
+   Reduced motion = fewer and gentler animations, not zero.
+   Keep opacity fades. Remove transform-based movement.
+----------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  /* Override all transform-based animations to fade-only */
+  .reveal-on-scroll {
+    transform: none !important;
+    transition: opacity var(--dur-base) ease;
+  }
+
+  .reveal-stagger > * {
+    transform: none !important;
+    animation: reveal-fade var(--dur-base) ease forwards;
+  }
+
+  /* Receipt scan: skip the dramatic scan, just fade the card in */
+  .receipt-card.scanning .scan-beam {
+    display: none;
+  }
+
+  .receipt-card.scanning .receipt-field {
+    animation: reveal-fade 0.4s ease forwards;
+    /* Preserve the staggered delay so it still feels orchestrated */
+    filter: none;
+  }
+
+  .receipt-card.scanning .receipt-field .field-value {
+    clip-path: none !important;
+    animation: none;
+  }
+
+  .receipt-card.scanning .receipt-lock {
+    animation: reveal-fade 0.3s ease forwards;
+    animation-delay: 1.5s;
+  }
+
+  /* No step slide-in — just fade */
+  .how-step.active {
+    animation: reveal-fade 300ms ease forwards;
+  }
+
+  /* Success state — fade only, no scale */
+  .form-success {
+    animation: reveal-fade 300ms ease forwards;
+  }
+}
